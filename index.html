@@ -615,7 +615,7 @@
                                 <span>Lihat Contoh</span>
                             </div>
                             <div class="image-preview" id="hostnamePreview">
-                                <img src="/api/placeholder/400/200" alt="Contoh Hostname">
+                                <img src="Hostname.png" alt="Contoh Hostname">
                             </div>
                         </div>
                         
@@ -639,7 +639,7 @@
                                 <span>Lihat Contoh</span>
                             </div>
                             <div class="image-preview" id="textdrawPreview">
-                                <img src="/api/placeholder/400/200" alt="Contoh Textdraw">
+                                <img src="Textdraw.png" alt="Contoh Textdraw">
                             </div>
                         </div>
                         
@@ -1037,9 +1037,9 @@
             document.querySelectorAll('.image-preview img').forEach(img => {
                 // Placeholder colors for demonstration
                 if (img.alt.includes('Hostname')) {
-                    img.src = "https://via.placeholder.com/400x150/36393f/FFFFFF?text=Contoh+Hostname";
+                    img.src = "Hostname.png";
                 } else if (img.alt.includes('Textdraw')) {
-                    img.src = "https://via.placeholder.com/400x150/36393f/FFFFFF?text=Contoh+Textdraw";
+                    img.src = "Textdraw.png";
                 }
             });
         });
