@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Spesial Server</title>
+    <style>
+        :root {
+            --primary: #5865F2;
+            --primary-dark: #4752c4;
+            --primary-light: #7984f5;
+            --secondary: #2c2f33;
+            --text: #ffffff;
+            --bg: #18191c;
+            --card-bg: #2f3136;
+            --input-bg: #40444b;
+            --success: #57F287;
+            --danger: #ED4245;
+            --warning: #FEE75C;
+            --section-bg: #36393f;
+            --hover: #4e5058;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 40%, transparent 50%);
+            background-size: 200% 200%;
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { background-position: 200% 0; }
+            100% { background-position: 0 0; }
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .section {
+            margin-bottom: 35px;
+            background-color: var(--section-bg);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--primary-light);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .bonus-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background-color 0.2s;
+        }
+        
+        .bonus-item:hover {
+            background-color: var(--hover);
+        }
+        
+        .checkbox-container {
+            margin-right: 15px;
+        }
+        
+        .checkbox-styled {
+            position: relative;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .checkbox-styled input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: #202225; /* Darker background for better visibility */
+            border: 1px solid #555; /* Adding a border for better definition */
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .checkbox-styled:hover input ~ .checkmark {
+            background-color: #555;
+        }
+        
+        .checkbox-styled input:checked ~ .checkmark {
+            background-color: var(--primary);
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .checkbox-styled input:checked ~ .checkmark:after {
+            display: block;
+        }
+        
+        .checkbox-styled .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        label {
+            font-size: 16px;
+            flex-grow: 1;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--input-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text);
+            margin-top: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.3);
+        }
+        
+        .actors-container {
+            margin-top: 15px;
+        }
+        
+        .actor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .actor-header h3 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .add-actor-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .add-actor-btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .actor-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .actor-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        .actor-field {
+            margin-bottom: 10px;
+        }
+        
+        .actor-field label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .delete-actor {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .delete-actor:hover {
+            background-color: #c53030;
+        }
+        
+        .indented-input {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .required {
+            background-color: var(--secondary);
+        }
+        
+        .required-title {
+            color: var(--warning);
+        }
+        
+        .notes {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .note-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+        }
+        
+        .note-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .note-icon {
+            margin-right: 15px;
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text);
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .submit-btn:hover::after {
+            animation: shine-button 1.5s;
+        }
+        
+        @keyframes shine-button {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-left: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-message {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success-message {
+            background-color: var(--success);
+            color: #033009;
+        }
+        
+        .error-message {
+            background-color: var(--danger);
+            color: #ffffff;
+        }
+        
+        .image-example {
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        
+        .image-preview-toggle {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .image-preview-toggle:hover {
+            background-color: var(--hover);
+        }
+        
+        .toggle-icon {
+            margin-right: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .image-preview {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        
+        .expanded .toggle-icon {
+            transform: rotate(90deg);
+        }
+        
+        .expanded + .image-preview {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in;
+        }
+        
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .actor-fields {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bonus Spesial untuk Server Anda</h1>
+            <p>Silakan pilih bonus yang ingin Anda klaim</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="bonusForm">
+                <!-- Optional Bonuses Section -->
+                <div class="section">
+                    <div class="section-title">
+                        Bonus Opsional
+                    </div>
+                    <p>Hapus ceklis pada bagian yang tidak ingin diklaim</p>
+                    
+                    <!-- Bonus 1: Request Actor -->
+                    <div class="form-group">
+                        <div class="bonus-item">
+                            <div class="checkbox-container">
+                                <label class="checkbox-styled">
+                                    <input type="checkbox" id="actorBonus">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <label for="actorBonus"><b>Gratis Penambahan</b>: Request Actor (Maksimal 5)</label>
+                        </div>
+                        
+                        <div class="actors-container" id="actorsContainer">
+                            <div class="actor-header">
+                                <h3>Actor</h3>
+                                <button type="button" id="addActorBtn" class="add-actor-btn">+</button>
+                            </div>
+                            <div id="actorsList"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bonus 2: Discord Logs -->
+                    <div class="form-group">
+                        <div class="bonus-item">
+                            <div class="checkbox-container">
+                                <label class="checkbox-styled">
+                                    <input type="checkbox" id="discordLogs">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <label for="discordLogs"><b>Gratis Penambahan</b>: Fitur Discord Logs</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Bonus 3: Mapping -->
+                    <div class="form-group">
+                        <div class="bonus-item">
+                            <div class="checkbox-container">
+                                <label class="checkbox-styled">
+                                    <input type="checkbox" id="mapping">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <label for="mapping"><b>Gratis Penambahan</b>: Mapping (Jika Anda malas, saya bisa pasangin!)</label>
+                        </div>
+                    </div>
+                    
+                    <!-- Bonus 4: Song Intro -->
+                    <div class="form-group">
+                        <div class="bonus-item">
+                            <div class="checkbox-container">
+                                <label class="checkbox-styled">
+                                    <input type="checkbox" id="songIntro">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <label for="songIntro"><b>Gratis Penggantian</b>: Lagu Intro</label>
+                        </div>
+                        
+                        <div class="indented-input" id="songContainer">
+                            <div class="actor-field">
+                                <label for="songLink">Link Lagu:</label>
+                                <input type="text" id="songLink" placeholder="Masukkan link lagu...">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bonus 5: Server Name Textdraw -->
+                    <div class="form-group">
+                        <div class="bonus-item">
+                            <div class="checkbox-container">
+                                <label class="checkbox-styled">
+                                    <input type="checkbox" id="textdraw">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <label for="textdraw"><b>Gratis Pembuatan</b>: Textdraw Nama Server</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Required Section -->
+                <div class="section required">
+                    <div class="section-title required-title">
+                        Wajib Diisi
+                    </div>
+                    
+                    <!-- Hostname -->
+                    <div class="form-group">
+                        <label for="hostname1">Hostname Server (Changename)</label>
+                        
+                        <div class="image-example">
+                            <div class="image-preview-toggle" id="hostnamePreviewToggle">
+                                <span class="toggle-icon">▶</span>
+                                <span>Lihat Contoh</span>
+                            </div>
+                            <div class="image-preview" id="hostnamePreview">
+                                <img src="/api/placeholder/400/200" alt="Contoh Hostname">
+                            </div>
+                        </div>
+                        
+                        <div class="actor-field">
+                            <label for="hostname1">Nama 1:</label>
+                            <input type="text" id="hostname1" placeholder="Masukkan nama server 1..." required>
+                        </div>
+                        <div class="actor-field">
+                            <label for="hostname2">Nama 2:</label>
+                            <input type="text" id="hostname2" placeholder="Masukkan nama server 2..." required>
+                        </div>
+                    </div>
+                    
+                    <!-- Server Name Textdraw -->
+                    <div class="form-group">
+                        <label for="serverName">Textdraw Nama Server</label>
+                        
+                        <div class="image-example">
+                            <div class="image-preview-toggle" id="textdrawPreviewToggle">
+                                <span class="toggle-icon">▶</span>
+                                <span>Lihat Contoh</span>
+                            </div>
+                            <div class="image-preview" id="textdrawPreview">
+                                <img src="/api/placeholder/400/200" alt="Contoh Textdraw">
+                            </div>
+                        </div>
+                        
+                        <div class="actor-field">
+                            <label for="serverName">Nama:</label>
+                            <input type="text" id="serverName" placeholder="Masukkan nama textdraw server..." required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Notes Section -->
+                <div class="section notes">
+                    <div class="section-title">
+                        Catatan Penting
+                    </div>
+                    
+                    <div class="note-item">
+                        <div class="note-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <div>Mapping dibuat oleh Anda sendiri!</div>
+                    </div>
+                    
+                    <div class="note-item">
+                        <div class="note-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                            </svg>
+                        </div>
+                        <div>Bonus tambahan: Video tutorial pembuatan arena & cara menambahkan mapping!</div>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Konfirmasi Bonus</button>
+                
+                <!-- Loading Indicator -->
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Mengirim data...</p>
+                </div>
+                
+                <!-- Success Message -->
+                <div class="result-message success-message" id="successMessage">
+                    <p>Bonus berhasil diklaim! Terima kasih telah menggunakan layanan kami.</p>
+                </div>
+                
+                <!-- Error Message -->
+                <div class="result-message error-message" id="errorMessage">
+                    <p>Terjadi kesalahan. Silakan coba lagi nanti atau hubungi admin.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const actorBonus = document.getElementById('actorBonus');
+            const actorsContainer = document.getElementById('actorsContainer');
+            const actorsList = document.getElementById('actorsList');
+            const addActorBtn = document.getElementById('addActorBtn');
+            const songIntro = document.getElementById('songIntro');
+            const songContainer = document.getElementById('songContainer');
+            const bonusForm = document.getElementById('bonusForm');
+            const loading = document.getElementById('loading');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const hostnamePreviewToggle = document.getElementById('hostnamePreviewToggle');
+            const hostnamePreview = document.getElementById('hostnamePreview');
+            const textdrawPreviewToggle = document.getElementById('textdrawPreviewToggle');
+            const textdrawPreview = document.getElementById('textdrawPreview');
+            
+            // Set webhook URL directly
+            const webhookUrl = "https://discord.com/api/webhooks/1349713548632264765/MlYQZmGOB32EXJeZc0YtIon-Q1phYPIcTIot0ly3TStQ_ty9pNXb_hJsZK_Y2d-ymEfM";
+            
+            // Actor counter
+            let actorCount = 0;
+            const MAX_ACTORS = 5;
+            
+            // Show/hide actor fields based on checkbox
+            actorBonus.addEventListener('change', function() {
+                actorsContainer.style.display = this.checked ? 'block' : 'none';
+            });
+            
+            // Initial state for actors
+            actorsContainer.style.display = actorBonus.checked ? 'block' : 'none';
+            
+            // Show/hide song link field based on checkbox
+            songIntro.addEventListener('change', function() {
+                songContainer.style.display = this.checked ? 'block' : 'none';
+            });
+            
+            // Initial state for song
+            songContainer.style.display = songIntro.checked ? 'block' : 'none';
+            
+            // Toggle image previews
+            hostnamePreviewToggle.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+            
+            textdrawPreviewToggle.addEventListener('click', function() {
+                this.classList.toggle('expanded');
+            });
+            
+            // Add actor function
+            function addActor() {
+                if (actorCount >= MAX_ACTORS) {
+                    alert('Maksimal 5 actor!');
+                    return;
+                }
+                
+                actorCount++;
+                
+                const actorDiv = document.createElement('div');
+                actorDiv.className = 'actor-item';
+                actorDiv.dataset.actorId = actorCount;
+                
+                actorDiv.innerHTML = `
+                    <button type="button" class="delete-actor" onclick="deleteActor(${actorCount})">×</button>
+                    <div class="actor-fields">
+                        <div class="actor-field">
+                            <label for="actorName${actorCount}">Nama Actor:</label>
+                            <input type="text" id="actorName${actorCount}" placeholder="Masukkan nama actor...">
+                        </div>
+                        <div class="actor-field">
+                            <label for="actorSkin${actorCount}">Skin:</label>
+                            <input type="text" id="actorSkin${actorCount}" placeholder="Masukkan skin actor...">
+                        </div>
+                        <div class="actor-field">
+                            <label for="actorCoord${actorCount}">Koordinat:</label>
+                            <input type="text" id="actorCoord${actorCount}" placeholder="Masukkan koordinat actor...">
+                        </div>
+                    </div>
+                `;
+                
+                actorsList.appendChild(actorDiv);
+                
+                // Disable add button if reached max
+                if (actorCount >= MAX_ACTORS) {
+                    addActorBtn.disabled = true;
+                    addActorBtn.style.opacity = '0.5';
+                }
+            }
+            
+            // Add to global scope for the onclick handler
+            window.deleteActor = function(id) {
+                const actorElement = document.querySelector(`.actor-item[data-actor-id="${id}"]`);
+                if (actorElement) {
+                    actorElement.remove();
+                    actorCount--;
+                    
+                    // Re-enable add button
+                    addActorBtn.disabled = false;
+                    addActorBtn.style.opacity = '1';
+                }
+            };
+            
+            // Add actor button click event
+            addActorBtn.addEventListener('click', addActor);
+            
+            // Form submission
+            bonusForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate required fields
+                const hostname1 = document.getElementById('hostname1').value;
+                const hostname2 = document.getElementById('hostname2').value;
+                const serverName = document.getElementById('serverName').value;
+                
+                if (!hostname1 || !hostname2 || !serverName) {
+                    alert('Silakan isi semua field yang wajib diisi!');
+                    return;
+                }
+                
+                // Show loading indicator
+                loading.style.display = 'block';
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                
+                // Collect form data
+                const formData = {
+                    bonuses: {
+                        actorBonus: document.getElementById('actorBonus').checked,
+                        discordLogs: document.getElementById('discordLogs').checked,
+                        mapping: document.getElementById('mapping').checked,
+                        songIntro: document.getElementById('songIntro').checked,
+                        textdraw: document.getElementById('textdraw').checked
+                    },
+                    songLink: document.getElementById('songLink').value,
+                    hostname: {
+                        name1: hostname1,
+                        name2: hostname2
+                    },
+                    serverName: serverName,
+                    actors: []
+                };
+                
+                // Collect actor data if enabled
+                if (formData.bonuses.actorBonus) {
+                    const actorItems = document.querySelectorAll('.actor-item');
+                    actorItems.forEach(item => {
+                        const id = item.dataset.actorId;
+                        formData.actors.push({
+                            name: document.getElementById(`actorName${id}`).value,
+                            skin: document.getElementById(`actorSkin${id}`).value,
+                            coordinates: document.getElementById(`actorCoord${id}`).value
+                        });
+                    });
+                }
+                
+                // Create Discord embed
+                const embed = {
+                    title: "Klaim Bonus Server Baru",
+                    color: 5865242, // Discord Blurple color
+                    fields: [
+                        {
+                            name: "Hostname Server",
+                            value: `Nama 1: ${formData.hostname.name1}\nNama 2: ${formData.hostname.name2}`,
+                            inline: false
+                        },
+                        {
+                            name: "Textdraw Nama Server",
+                            value: formData.serverName,
+                            inline: false
+                        }
+                    ],
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: "Bonus Server Form"
+                    }
+                };
+                
+                // Add bonuses to embed
+                const bonusesText = [];
+                if (formData.bonuses.actorBonus) bonusesText.push("✅ Request Actor");
+                if (formData.bonuses.discordLogs) bonusesText.push("✅ Discord Logs");
+                if (formData.bonuses.mapping) bonusesText.push("✅ Mapping");
+                if (formData.bonuses.songIntro) bonusesText.push("✅ Lagu Intro");
+                if (formData.bonuses.textdraw) bonusesText.push("✅ Textdraw Nama Server");
+                
+                embed.fields.push({
+                    name: "Bonus yang Diklaim",
+                    value: bonusesText.join("\n") || "Tidak ada bonus yang dipilih",
+                    inline: false
+                });
+                
+                // Add song link if provided
+                if (formData.bonuses.songIntro && formData.songLink) {
+                    embed.fields.push({
+                        name: "Link Lagu Intro",
+                        value: formData.songLink,
+                        inline: false
+                    });
+                }
+                
+                // Add actors if any
+                if (formData.bonuses.actorBonus && formData.actors.length > 0) {
+                    const actorsText = formData.actors.map((actor, index) => {
+                        return `**Actor ${index + 1}**\nNama: ${actor.name || "N/A"}\nSkin: ${actor.skin || "N/A"}\nKoordinat: ${actor.coordinates || "N/A"}`;
+                    }).join("\n\n");
+                    
+                    embed.fields.push({
+                        name: "Data Actor",
+                        value: actorsText,
+                        inline: false
+                    });
+                }
+                
+                // Prepare webhook payload
+                const payload = {
+                    username: "Bonus Server",
+                    avatar_url: "https://i.imgur.com/4M34hi2.png",
+                    embeds: [embed]
+                };
+                
+                // Send data to webhook
+                fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                })
+                .then(response => {
+                    loading.style.display = 'none';
+                    
+                    if (response.ok) {
+                        successMessage.style.display = 'block';
+                        // Reset form
+                        setTimeout(() => {
+                            bonusForm.reset();
+                            actorsList.innerHTML = '';
+                            actorCount = 0;
+                            addActorBtn.disabled = false;
+                            addActorBtn.style.opacity = '1';
+                            actorsContainer.style.display = 'none';
+                            songContainer.style.display = 'none';
+                            successMessage.style.display = 'none';
+                        }, 5000);
+                    } else {
+                        errorMessage.style.display = 'block';
+                        console.error("Webhook error:", response.status);
+                    }
+                })
+                .catch(error => {
+                    loading.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    console.error("Error:", error);
+                });
+            });
+            
+            // Image preview hover animations
+            const previewToggles = document.querySelectorAll('.image-preview-toggle');
+            previewToggles.forEach(toggle => {
+                toggle.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'var(--hover)';
+                });
+                
+                toggle.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('expanded')) {
+                        this.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    }
+                });
+            });
+            
+            // Mobile responsiveness improvements
+            function checkScreenSize() {
+                const width = window.innerWidth;
+                if (width < 600) {
+                    // Adjust padding for mobile
+                    document.querySelectorAll('.form-container, .section').forEach(el => {
+                        el.style.padding = '15px';
+                    });
+                    
+                    // Make actor items more compact
+                    document.querySelectorAll('.actor-item').forEach(el => {
+                        el.style.padding = '10px';
+                    });
+                } else {
+                    // Reset to default
+                    document.querySelectorAll('.form-container').forEach(el => {
+                        el.style.padding = '30px';
+                    });
+                    document.querySelectorAll('.section').forEach(el => {
+                        el.style.padding = '25px';
+                    });
+                    document.querySelectorAll('.actor-item').forEach(el => {
+                        el.style.padding = '15px';
+                    });
+                }
+            }
+            
+            // Run on load and resize
+            window.addEventListener('resize', checkScreenSize);
+            checkScreenSize();
+            
+            // Smooth scrolling to form sections
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', function() {
+                    const section = this.closest('.section');
+                    section.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // Animations for submit button
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+            
+            submitBtn.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '';
+            });
+            
+            // Add custom validation styles
+            const inputs = document.querySelectorAll('input[required]');
+            inputs.forEach(input => {
+                input.addEventListener('invalid', function() {
+                    this.style.borderColor = 'var(--danger)';
+                });
+                
+                input.addEventListener('input', function() {
+                    this.style.borderColor = '';
+                });
+            });
+            
+            // Add placeholder images for the preview examples
+            // In a real implementation, replace these with actual images
+            document.querySelectorAll('.image-preview img').forEach(img => {
+                // Placeholder colors for demonstration
+                if (img.alt.includes('Hostname')) {
+                    img.src = "https://via.placeholder.com/400x150/36393f/FFFFFF?text=Contoh+Hostname";
+                } else if (img.alt.includes('Textdraw')) {
+                    img.src = "https://via.placeholder.com/400x150/36393f/FFFFFF?text=Contoh+Textdraw";
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
